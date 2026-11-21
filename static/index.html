@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#090e18" />
+  <title>ClipForge Web — AI Viral Clipper dari Link YouTube</title>
+  <meta name="description" content="Tempel link YouTube berizin, temukan momen terbaik dengan sinyal replay, dan buat video vertikal otomatis." />
+  <link rel="manifest" href="/static/site.webmanifest" />
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-icon">✦</div><div><div class="brand-name">clipforge<span>.</span></div><div class="brand-sub">CREATOR STUDIO</div></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <button class="side-button active" id="navStudio"><span class="side-symbol">▣</span> Studio Clipper <span class="side-arrow">›</span></button>
+    <button class="side-button" id="navHelp"><span class="side-symbol">◎</span> Cara Penggunaan <span class="side-arrow">›</span></button>
+    <div class="sidebar-grow"></div>
+    <div class="side-tip"><div class="tip-icon">✧</div><strong>YouTube jadi Shorts otomatis.</strong><p>Potong sekali, ekspor banyak format. Hasil diproses oleh server website, lalu bisa diunduh ke HP atau laptop.</p></div>
+    <div class="sidebar-bottom"><span class="health-dot" id="statusDot"></span><span id="engineStatus">Memeriksa engine…</span><span class="version">v3 WEB</span></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="topbar-title"><span class="breadcrumb">Workspace</span><span class="slash">/</span><b>Clipper Studio</b></div><div class="topbar-right"><span class="top-chip"><span class="green-dot"></span> Website privat</span><span class="avatar">CF</span></div></header>
+    <div class="content">
+      <div class="website-note" role="note"><span>🌐</span> <div><strong>Versi website — cocok untuk HP &amp; laptop.</strong><small>Cukup tempel link YouTube berizin. Pemrosesan berjalan di server, hasil MP4 bisa diunduh ke perangkatmu.</small></div></div>
+      <div class="heading-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR CREATIVE WORKSPACE</div><h1>Video Clipper <span>Studio</span></h1><p class="lede">Ubah video panjang jadi konten pendek siap posting, dalam beberapa klik.</p></div><span class="headline-badge">✦ MADE FOR CREATORS</span></div>
+      <section id="studioPage">
+        <div class="workspace-grid">
+          <div class="left-column">
+            <section class="panel source-panel"><div class="panel-header"><div class="panel-title"><span class="step">01</span><h2>Masukkan video</h2></div><span class="subtle">1 link → langsung jadi clip</span></div>
+              <div class="switcher"><button class="switch active" id="tabYoutube" type="button"><span class="yt-icon">▶</span> Link YouTube</button><button class="switch" id="tabUpload" type="button"><span>⇧</span> Upload video</button></div>
+              <div id="youtubePane">
+                <form id="youtubeForm"><div class="input-row"><div class="text-field"><span class="input-icon">↗</span><input id="youtubeUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" required /></div><button class="primary-button import-button" type="submit" id="youtubeButton">✦ Analisis dari Link &amp; Auto Clip <span>→</span></button></div>
+                  <label class="permission"><input type="checkbox" id="rightsCheck" /><span>Saya pemilik video atau memiliki izin untuk menggunakan dan mengunduhnya.</span></label>
+                  <label class="permission youtube-auto-choice"><input type="checkbox" id="youtubeAuto" checked /><span><strong>Mode 1 klik:</strong> dari link YouTube langsung analisis, pilih highlight, lalu buat MP4 otomatis. Atur durasi dan jumlah clip di bawah. <small>Matikan untuk mengimpor video saja.</small></span></label></form>
+              </div>
+              <div id="uploadPane" class="hidden"><div class="dropzone" id="dropzone" tabindex="0" role="button"><input type="file" id="fileInput" accept="video/mp4,video/quicktime,video/webm,video/x-matroska,video/x-msvideo,.m4v" hidden /><span class="drop-icon">⇧</span><div><strong>Klik atau tarik video ke sini</strong><small>MP4, MOV, MKV, WEBM, AVI · Maksimal 700 MB</small></div><span class="outline-button">Pilih file</span></div></div>
+              <div class="notice-line" id="sourceStatus" aria-live="polite"><span class="mini-info">i</span> Masukkan link YouTube, atur jumlah dan durasi clip di panel AI, lalu klik Analisis dari Link.</div>
+            </section>
+            <section class="panel ai-panel" id="aiPanel">
+              <div class="panel-header"><div class="panel-title"><span class="step ai-step">✧</span><h2>AI Auto Viral Clipper</h2></div><span class="ai-chip">AUTO URL · v3 WEB</span></div>
+              <p class="ai-intro">Tanpa upload manual: tempel link YouTube dan sistem langsung menjalankan analisis serta membuat clip. Temukan momen paling menarik. Bila tersedia, gunakan data YouTube <b>Most Replayed</b> (bagian sering diputar ulang), ditambah analisis suara, visual, dan AI ucapan; lalu ekspor MP4 otomatis.</p>
+              <div class="ai-option-grid">
+                <div class="ai-field"><label for="aiDuration">DURASI PER CLIP</label><select id="aiDuration"><option value="15">15 detik</option><option value="30" selected>30 detik</option><option value="45">45 detik</option><option value="60">60 detik</option></select></div>
+                <div class="ai-field"><label for="aiCount">JUMLAH CLIP</label><select id="aiCount"><option value="3">3 terbaik</option><option value="5" selected>5 terbaik</option><option value="10">10 terbaik</option></select></div>
+              </div>
+              <label class="ai-check"><input type="checkbox" id="aiSpeech" checked /><span>Gunakan AI transkrip untuk analisis hook percakapan <small>(opsional: perlu instal faster-whisper; ada fallback audio/visual)</small></span></label>
+              <label class="ai-check"><input type="checkbox" id="aiAutoExport" checked /><span>Langsung ekspor hasil ke MP4 setelah analisis</span></label>
+              <div class="retention-box"><div><strong>Data retensi penonton asli <span class="optional-label">OPSIONAL</span></strong><p>Punya channel YouTube sendiri? Impor CSV dari YouTube Analytics supaya prioritas berdasarkan bagian yang benar-benar sering ditonton, bukan tebakan.</p><a href="/static/contoh-retensi.csv" download>Contoh format CSV</a></div><label for="retentionFile" class="retention-upload" id="retentionUploadLabel">＋ Unggah CSV</label><input type="file" id="retentionFile" accept=".csv,text/csv" hidden /></div>
+              <div class="retention-state" id="retentionStatus">Jika tersedia, data YouTube Most Replayed akan terbaca otomatis dari link.</div>
+              <button id="aiAnalyze" class="ai-button" type="button" disabled>✦ Analisis & Auto-Clip Video <span>→</span></button>
+              <p class="ai-disclaimer">Link YouTube tetap membutuhkan video yang dapat diakses serta izin penggunaan. Jika video tidak menyediakan Most Replayed, penilaian memakai audio/visual dan AI transkrip bila terpasang. Skor potensi 0–100 adalah <b>ranking perkiraan potensi highlight dalam video</b>, bukan angka views, view rate, atau jaminan viral. Angka retensi asli hanya tersedia dari data channel pemilik.</p>
+              <div id="aiProgressBox" class="ai-progress-box hidden"><div class="ai-progress-row"><strong id="aiStage">Memproses analisis…</strong><span id="aiPercent">0%</span></div><div class="progress-outer"><div id="aiProgressBar" class="progress-inner"></div></div></div>
+              <div id="aiWarnings" class="ai-warnings hidden"></div>
+              <div id="aiResults" class="ai-results hidden"><div class="ai-results-head"><strong>✧ Rekomendasi momen terbaik</strong><span id="aiMethod"></span></div><div id="aiSuggestions" class="ai-suggestions"></div></div>
+            </section>
+            <section class="panel player-panel"><div class="panel-header"><div class="panel-title"><span class="step">02</span><h2>Preview & tentukan durasi</h2></div><span class="subtle" id="videoBadge">Belum ada video</span></div>
+              <div class="video-frame" id="videoFrame"><div class="placeholder" id="placeholder"><div class="placeholder-art"><div class="ambient-circle"></div><div class="play-emblem"><span>▶</span></div><div class="spark spark-one">✦</div><div class="spark spark-two">✧</div></div><strong>Video kamu muncul di sini</strong><span>Impor video terlebih dahulu untuk mulai clipping</span></div><video id="player" class="hidden" playsinline controls preload="metadata"></video></div>
+              <div class="video-detail"><div class="video-text"><strong id="sourceTitle">Belum memilih video</strong><span id="sourceMeta">Format & durasi akan muncul setelah impor</span></div><div class="time-readout" id="timeReadout">00:00 <span>/</span> 00:00</div></div>
+              <div class="scrub-line"><input id="scrubber" type="range" min="0" max="100" step="0.01" value="0" disabled aria-label="Timeline video" /></div>
+              <div class="trim-head"><div><h3>Set potongan video</h3><p>Atur waktu manual atau ambil dari posisi player.</p></div><span class="clip-length" id="clipLength">Durasi: 00:00</span></div>
+              <div class="trim-fields"><div class="time-field"><label for="startTime">WAKTU MULAI</label><div class="time-input"><input id="startTime" value="00:00:00" aria-label="Waktu mulai clip" /><button id="markStart" title="Gunakan waktu player saat ini" type="button">⊙ Set</button></div></div><div class="trim-divider">→</div><div class="time-field"><label for="endTime">WAKTU SELESAI</label><div class="time-input"><input id="endTime" value="00:00:30" aria-label="Waktu akhir clip" /><button id="markEnd" title="Gunakan waktu player saat ini" type="button">⊙ Set</button></div></div></div>
+              <div class="add-clip-row"><div class="text-field clip-name-field"><span class="input-icon">✎</span><input id="clipTitle" value="Clip 01" maxlength="90" aria-label="Nama clip" placeholder="Nama clip" /></div><button class="secondary-button" id="addClip" type="button">＋ Tambah clip</button></div>
+              <div class="inline-message hidden" id="clipMessage" role="status"></div>
+            </section>
+            <section class="panel clip-panel"><div class="panel-header"><div class="panel-title"><span class="step">03</span><h2>Daftar clip</h2><span class="count-badge" id="clipCount">0</span></div><button class="small-text-button" id="clearClips" type="button">Hapus semua</button></div>
+              <div id="clipList"><div class="empty-list"><span class="empty-list-icon">▤</span><strong>Belum ada clip</strong><span>Atur waktu di atas, lalu klik “Tambah clip”.</span></div></div>
+            </section>
+          </div>
+          <div class="right-column"><section class="panel export-panel"><div class="panel-header"><div class="panel-title"><span class="step">04</span><h2>Pengaturan ekspor</h2></div></div>
+            <div class="settings-label">FORMAT VIDEO</div><div class="aspect-options"><button class="aspect-card selected" type="button" data-aspect="vertical"><span class="aspect-symbol vertical"></span><strong>9:16</strong><small>Shorts / Reels</small></button><button class="aspect-card" type="button" data-aspect="square"><span class="aspect-symbol square"></span><strong>1:1</strong><small>Feed</small></button><button class="aspect-card" type="button" data-aspect="original"><span class="aspect-symbol landscape"></span><strong>Original</strong><small>Asli</small></button></div>
+            <div class="setting-block" id="framingBlock"><div class="setting-title">Posisi video <span class="info-mark" title="Crop memotong bagian pinggir; blur mempertahankan seluruh frame.">ⓘ</span></div><label class="radio-row"><input type="radio" name="framing" value="crop" checked /><span class="radio-visual"></span><span><strong>Crop tengah</strong><small>Isi layar penuh tanpa border</small></span></label><label class="radio-row"><input type="radio" name="framing" value="blur" /><span class="radio-visual"></span><span><strong>Background blur</strong><small>Video utuh dengan latar blur</small></span></label></div>
+            <div class="setting-block" id="qualityBlock"><div class="setting-title">Kualitas video</div><div class="quality-options"><button class="quality-option selected" type="button" data-quality="1080">1080p <small>HD</small></button><button class="quality-option" type="button" data-quality="720">720p <small>Ringan</small></button></div></div>
+            <div class="export-summary"><div><span>Jumlah clip</span><strong id="summaryCount">0 video</strong></div><div><span>Total durasi</span><strong id="summaryLength">00:00</strong></div><div><span>Format hasil</span><strong>MP4 · H.264</strong></div></div>
+            <button class="export-button" id="exportButton" disabled type="button"><span>✦</span> Export Semua Clip <span>↗</span></button><p class="export-hint">Hasil disimpan sebagai MP4, bisa diunduh satu per satu atau dalam ZIP.</p>
+          </section>
+          <section class="panel results-panel hidden" id="resultsPanel"><div class="panel-header"><div class="panel-title"><span class="result-star">✓</span><h2>Hasil ekspor</h2></div></div><div id="exportStatus" class="job-label">Menyiapkan ekspor...</div><div class="progress-outer"><div class="progress-inner" id="exportProgress"></div></div><div id="downloads"></div></section>
+          <div class="pro-tip"><span class="pro-tip-star">✧</span><div><strong>Tips untuk Shorts yang menarik</strong><p>Gunakan durasi 15–60 detik, mulai dari bagian yang paling menarik, lalu pilih format 9:16 untuk tampilan vertikal.</p></div></div>
+          </div>
+        </div>
+      </section>
+      <section id="helpPage" class="hidden"><div class="help-panel"><h2>Cara menggunakan ClipForge</h2><div class="help-steps"><div><b>01</b><strong>Impor video</strong><p>Tempel tautan YouTube yang Anda punya hak/izin menggunakannya, atau upload video dari perangkat.</p></div><div><b>02</b><strong>Atur detik awal dan akhir</strong><p>Putar video lalu klik “Set” untuk menandai titik waktu. Anda juga dapat mengetik HH:MM:SS.</p></div><div><b>03</b><strong>Tambahkan beberapa clip</strong><p>Masukkan nama clip dan klik “Tambah clip”, ulangi untuk bagian lain (maksimal 10 clip per ekspor).</p></div><div><b>04</b><strong>AI Auto-Clip atau ekspor manual</strong><p>Untuk otomatis, gunakan panel AI Auto Viral Clipper. Atur durasi, jumlah clip dan opsi auto-ekspor, lalu klik Analisis & Auto-Clip. Atau pilih format dan ekspor clip manual seperti biasa.</p></div></div><div class="help-note">Catatan: AI memilih kandidat berdasarkan sinyal video dan, jika model terpasang, transkrip ucapan. Skor potensi viral bukan jumlah views. Data retensi asli dapat diimpor dari Analytics milik channel Anda. Impor YouTube dapat gagal bila video privat, dibatasi, atau ketika YouTube mengubah aksesnya.</div><button class="primary-button" id="backStudio">← Kembali ke studio</button></div></section>
+      <footer class="footer"><span>© 2026 ClipForge Studio · Built for creators</span><span>Potong dengan presisi. Publikasikan dengan percaya diri.</span></footer>
+    </div>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

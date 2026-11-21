@@ -1,0 +1,23 @@
+# Deploy: upload this project to GitHub, then Render > New > Blueprint.
+# Hosting is paid for sustained video rendering + persistent storage.
+services:
+  - type: web
+    name: clipforge-ai-web
+    runtime: docker
+    plan: standard
+    healthCheckPath: /api/health
+    envVars:
+      - key: CLIPFORGE_WEB_USER
+        value: clipforge
+      - key: CLIPFORGE_WEB_PASSWORD
+        sync: false
+      - key: CLIPFORGE_PUBLIC
+        value: "1"
+      - key: CLIPFORGE_DATA_DIR
+        value: /app/data
+      - key: CLIPFORGE_WHISPER_MODEL
+        value: tiny
+    disk:
+      name: clipforge-video-data
+      mountPath: /app/data
+      sizeGB: 10

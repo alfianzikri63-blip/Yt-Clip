@@ -1,0 +1,9 @@
+.git
+__pycache__
+*.pyc
+data
+*.zip
+.venv
+tests
+README.md
+README-WEB.md

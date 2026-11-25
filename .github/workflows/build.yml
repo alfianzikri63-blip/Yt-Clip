@@ -1,0 +1,55 @@
+name: Clipper Studio AI - Auto Build APK
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'Clipper_Studio_AI_V1_Source.zip'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract Android source
+        run: |
+          mkdir -p source
+          unzip -q Clipper_Studio_AI_V1_Source.zip -d source
+          test -f source/settings.gradle
+          test -f source/app/build.gradle
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+      - name: Test clip planner
+        working-directory: source
+        run: |
+          mkdir -p /tmp/clipper-test
+          javac -d /tmp/clipper-test app/src/main/java/com/clipper/studio/Planner.java tests/PlannerTest.java
+          java -cp /tmp/clipper-test com.clipper.studio.PlannerTest
+      - name: Build installable test APK
+        working-directory: source
+        run: gradle --no-daemon :app:assembleDebug
+      - name: Prepare APK
+        run: |
+          mkdir -p dist
+          cp source/app/build/outputs/apk/debug/app-debug.apk dist/Clipper-Studio-AI-V1.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Clipper-Studio-AI-V1-APK
+          path: dist/Clipper-Studio-AI-V1.apk
+          if-no-files-found: error
+      - name: Publish APK to GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v1.0-test-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" dist/Clipper-Studio-AI-V1.apk --target "$GITHUB_SHA" --title "Clipper Studio AI V1.0 TEST - Build ${GITHUB_RUN_NUMBER}" --notes "Installable Android debug APK for testing. YouTube link reads metadata only; rendering requires an authorized source video." --prerelease
